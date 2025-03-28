@@ -3,15 +3,18 @@
 
 <PageTitle>Home</PageTitle>
 
+<p><b>Detected Environment:</b> @DetectedEnvironment</p>
 <p><b>Aspire URL:</b> @AspireURL</p>
 <p><b>Azure Container Apps URL:</b> @AzureContainerAppsURL</p>
 
 @code {
+    private string? DetectedEnvironment;
     private string? AspireURL;
     private string? AzureContainerAppsURL;
 
     protected override void OnInitialized()
     {
+        DetectedEnvironment = Configuration["DetectedEnvironment"];
         AspireURL = Configuration["Aspire_URL"];
         AzureContainerAppsURL = Configuration["AzureContainerApps_URL"];
     }

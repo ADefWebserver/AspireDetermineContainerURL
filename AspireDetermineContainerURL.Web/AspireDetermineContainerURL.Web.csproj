@@ -4,16 +4,23 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>14a71112-1ef9-4de0-a80d-1ee631be04a8</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.13.2" />
     <PackageReference Include="Azure.ResourceManager" Version="1.13.0" />
     <PackageReference Include="Azure.ResourceManager.AppConfiguration" Version="1.4.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AspireDetermineContainerURL.ServiceDefaults\AspireDetermineContainerURL.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

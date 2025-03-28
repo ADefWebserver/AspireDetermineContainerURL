@@ -23,15 +23,20 @@ var app = builder.Build();
 // ****************************
 if (app.Environment.IsDevelopment())
 {
+    app.Configuration["DetectedEnvironment"] = "Dev";
+
     // Get value from Aspire
     // This was set in AppHost
     var LocalUrl = builder.Configuration["APP_URL"];
 
     // Add the URL to the configuration so it can be displayed in the .razor apge
-    app.Configuration["Aspire_URL"] = LocalUrl;
+    app.Configuration["Aspire_URL"] = LocalUrl;    
 }
 else
 {
+    app.Configuration["DetectedEnvironment"] = "Production";
+
+    // Get values from Azure
     // Retrieve required environment variables
     var subscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
     var resourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
@@ -56,9 +61,20 @@ else
 
         // Retrieve the endpoint for the configuration store
         string endpoint = storeData.Endpoint;
+
         if (string.IsNullOrEmpty(endpoint))
         {
             Console.WriteLine("No endpoint information available for the configuration store.");
+
+            // Return values found
+            string? ParamSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
+            string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
+            string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
+
+            app.Configuration["AzureContainerApps_URL"] = $"AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
+                $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
+                $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
+
             return;
         }
 
@@ -69,6 +85,15 @@ else
     {
         Console.WriteLine("Please set the following environment variables:");
         Console.WriteLine("AZURE_SUBSCRIPTION_ID, RESOURCE_GROUP, APPCONFIGURATION_NAME");
+
+        // Return values found
+        string? ParamSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
+        string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
+        string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
+
+        app.Configuration["AzureContainerApps_URL"] = $"AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
+            $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
+            $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
     }
 }
 
