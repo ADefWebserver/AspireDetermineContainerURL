@@ -71,7 +71,8 @@ else
             string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
             string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
 
-            app.Configuration["AzureContainerApps_URL"] = $"AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
+            app.Configuration["AzureContainerApps_URL"] = 
+                $"[All values found] - [storeData: {storeData}] - AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
                 $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
                 $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
 
@@ -91,7 +92,8 @@ else
         string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
         string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
 
-        app.Configuration["AzureContainerApps_URL"] = $"AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
+        app.Configuration["AzureContainerApps_URL"] = 
+            $"[Missing Values] -  AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
             $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
             $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
     }
