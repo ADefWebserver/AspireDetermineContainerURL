@@ -6,16 +6,19 @@
 <p><b>Detected Environment:</b> @DetectedEnvironment</p>
 <p><b>Aspire URL:</b> @AspireURL</p>
 <p><b>Azure Container Apps URL:</b> @AzureContainerAppsURL</p>
+<p><b>Resource Group Name:</b> @RESOURCE_GROUP_NAME</p>
 
 @code {
     private string? DetectedEnvironment;
     private string? AspireURL;
     private string? AzureContainerAppsURL;
+    private string? RESOURCE_GROUP_NAME;
 
     protected override void OnInitialized()
     {
         DetectedEnvironment = Configuration["DetectedEnvironment"];
         AspireURL = Configuration["Aspire_URL"];
         AzureContainerAppsURL = Configuration["AzureContainerApps_URL"];
+        RESOURCE_GROUP_NAME = Configuration["RESOURCE_GROUP_NAME"];
     }
 }

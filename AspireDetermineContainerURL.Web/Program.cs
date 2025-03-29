@@ -42,6 +42,8 @@ else
     var resourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP_NAME");
     var configStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
 
+    app.Configuration["RESOURCE_GROUP_NAME"] = resourceGroupName;
+
     if (!string.IsNullOrEmpty(subscriptionId) &&
         !string.IsNullOrEmpty(resourceGroupName) &&
         !string.IsNullOrEmpty(configStoreName))
