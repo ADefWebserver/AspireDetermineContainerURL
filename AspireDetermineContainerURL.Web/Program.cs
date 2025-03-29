@@ -39,7 +39,7 @@ else
     // Get values from Azure
     // Retrieve required environment variables
     var subscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
-    var resourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
+    var resourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP_NAME");
     var configStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
 
     if (!string.IsNullOrEmpty(subscriptionId) &&
@@ -66,15 +66,10 @@ else
         {
             Console.WriteLine("No endpoint information available for the configuration store.");
 
-            // Return values found
-            string? ParamSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
-            string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
-            string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
-
             app.Configuration["AzureContainerApps_URL"] = 
-                $"[All values found] - [storeData: {storeData}] - AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
-                $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
-                $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
+                $"[All values found] - [storeData: {storeData}] - AZURE_SUBSCRIPTION_ID:{subscriptionId} " +
+                $"- RESOURCE_GROUP_NAME: {resourceGroupName} " +
+                $"- APPCONFIGURATION_NAME: {configStoreName}";
 
             return;
         }
@@ -87,15 +82,10 @@ else
         Console.WriteLine("Please set the following environment variables:");
         Console.WriteLine("AZURE_SUBSCRIPTION_ID, RESOURCE_GROUP, APPCONFIGURATION_NAME");
 
-        // Return values found
-        string? ParamSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
-        string? ParamResourceGroupName = Environment.GetEnvironmentVariable("RESOURCE_GROUP");
-        string? ParamConfigStoreName = Environment.GetEnvironmentVariable("APPCONFIGURATION_NAME");
-
         app.Configuration["AzureContainerApps_URL"] = 
-            $"[Missing Values] -  AZURE_SUBSCRIPTION_ID:{ParamSubscriptionId} " +
-            $"- RESOURCE_GROUP: {ParamResourceGroupName} " +
-            $"- APPCONFIGURATION_NAME: {ParamConfigStoreName}";
+            $"[Missing Values] -  AZURE_SUBSCRIPTION_ID:{subscriptionId} " +
+            $"- RESOURCE_GROUP_NAME: {resourceGroupName} " +
+            $"- APPCONFIGURATION_NAME: {configStoreName}";
     }
 }
 
